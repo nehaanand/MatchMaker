@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout">
+
+    <data>
+
+        <import type="android.view.View" />
+
+
+        <variable
+            name="viewModel"
+            type="neha.matchmaker.model.UsersGridItemModel" />
+
+    </data>
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+
+        android:layout_marginTop="10dp"
+        android:background="@drawable/shadow_middle"
+        android:descendantFocusability="blocksDescendants"
+
+
+        app:layout_constraintEnd_toEndOf="@+id/btnAccept"
+        app:layout_constraintStart_toEndOf="@+id/btnAccept">
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/first_card"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:cardCornerRadius="5dp"
+
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="@+id/btnDecline"
+                app:layout_constraintStart_toEndOf="@+id/btnDecline">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="fitXY"
+
+                    app:imageUrl="@{viewModel.getUserImage()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/caritems_gradient"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <TextView
+                    android:id="@+id/lbl_age"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
+
+                    android:layout_marginBottom="140dp"
+                    android:text="Age"
+                    android:textColor="@android:color/white"
+
+                    android:textSize="15dp"
+
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:mutableText="@{viewModel.getUserAge()}" />
+
+
+                <TextView
+                    android:id="@+id/lbl_city"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="50dp"
+                    android:text="City,State"
+
+                    android:textColor="@android:color/white"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+
+                    app:layout_constraintStart_toStartOf="@+id/btnAccept"
+                    app:layout_constraintTop_toTopOf="@+id/lbl_age"
+                    app:mutableText="@{viewModel.getUserCity()}" />
+
+                <!--android:background="#1b6873"-->
+
+                <Button
+                    android:id="@+id/btnDecline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/reject"
+                    android:text="REJECT"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/guideline"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_age" />
+
+                <android.support.constraint.Guideline
+                    android:id="@+id/guideline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+
+                <Button
+                    android:id="@+id/btnAccept"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+
+                    android:background="@drawable/accept"
+                    android:text="ACCEPT"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textStyle="italic"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnDecline"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toRightOf="@+id/guideline"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btnDecline" />
+
+
+                <TextView
+                    android:id="@+id/lbl_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="113dp"
+
+                    android:text="Name"
+                    android:textColor="@android:color/white"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/lbl_age"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:mutableText="@{viewModel.getUserName()}" />
+
+                <!--app:mutableVisibility="@{viewModel.getUserStatus().equals(` `)?gone:visible}"-->
+
+                <Button
+                    android:id="@+id/btnStatus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnAccept"
+                    app:layout_constraintEnd_toEndOf="@+id/btnDecline"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintLeft_toRightOf="@+id/guideline"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/btnAccept"
+                    app:mutableText="@{viewModel.getUserStatus()}"
+                    tools:layout_editor_absoluteY="229dp" />
+
+                <ImageView
+                    android:id="@+id/iv_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginStart="48dp"
+                    android:layout_marginLeft="48dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@{viewModel.getUserGender().equals(`male`)?@drawable/ic_male:@drawable/ic_female}"
+                    app:layout_constraintBottom_toBottomOf="@+id/lbl_name"
+                    app:layout_constraintEnd_toStartOf="@+id/guideline"
+                    app:layout_constraintRight_toRightOf="@+id/lbl_name"
+                    app:layout_constraintStart_toEndOf="@+id/lbl_name"
+                    app:layout_constraintTop_toTopOf="@+id/lbl_name" />
+
+            </android.support.constraint.ConstraintLayout>
+        </android.support.v7.widget.CardView>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="neha.matchmaker.viewmodel.shadiusers.ShadiUsersViewModel">
+
+        </variable>
+
+    </data>
+
+
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:descendantFocusability="blocksDescendants">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:mutableVisibility="@{viewModel.getLoadingVisibility()}" />
+
+            <!--app:adapter="@{viewModel.getCharactersListAdapter()}"-->
+
+
+            <GridView
+                android:id="@+id/rv_users"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:numColumns="1"
+                android:text="@string/app_name"
+                android:verticalSpacing="5dp"
+                app:adapter="@{viewModel.getUserListAdapter()}"
+                app:layout_constraintBottom_toBottomOf="parent"></GridView>
+        </android.support.constraint.ConstraintLayout>
+</layout>
+
