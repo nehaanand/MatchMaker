@@ -19,6 +19,6 @@ data class Users(
         val age: String,
         val city: String,
         val state: String,
-        val status: String
+        var status: String
 
 )

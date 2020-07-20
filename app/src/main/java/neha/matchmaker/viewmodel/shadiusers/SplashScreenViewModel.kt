@@ -41,13 +41,11 @@ class SplashScreenViewModel(private val usersDao: UsersDao) : BaseViewModel() {
     }
 
 
-
-     fun loadUsers() {
-
+    fun loadUsers() {
 
 
-
-         apiCall.getUsers().concatMap { apiList ->           //get data from randomuser.me host
+        apiCall.getUsers().concatMap { apiList ->
+            //get data from randomuser.me host
             apiList
             Observable.just(apiList)
         }
@@ -74,9 +72,6 @@ class SplashScreenViewModel(private val usersDao: UsersDao) : BaseViewModel() {
 
     private fun onRetrieveEpisodesListSuccess(userlist: UsersResponse) {
         Log.d("fdh", "hii")
-
-
-
 
 
         var list: MutableList<Users> = mutableListOf()

@@ -12,15 +12,15 @@ import neha.matchmaker.injection.ViewModelFactory
 import neha.matchmaker.model.database.UsersDao
 import neha.matchmaker.viewmodel.shadiusers.SplashScreenViewModel
 
-class SplashScreen : AppCompatActivity(){
-    private lateinit var binding:neha.matchmaker.databinding.ActivitySplashScreenBinding
+class SplashScreen : AppCompatActivity() {
+    private lateinit var binding: neha.matchmaker.databinding.ActivitySplashScreenBinding
     private lateinit var viewModel: SplashScreenViewModel
     private var errorSnackbar: Snackbar? = null
-    private var userDao:UsersDao?=null
+    private var userDao: UsersDao? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= DataBindingUtil.setContentView(this,R.layout.activity_splash_screen);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash_screen);
         viewModel = ViewModelProviders.of(this, ViewModelFactory(this)).get(SplashScreenViewModel::class.java)
 
         viewModel.liveData.observe(this, Observer {
@@ -30,22 +30,21 @@ class SplashScreen : AppCompatActivity(){
                 }
             }
         })
-        viewModel.errorMessage.observe(this, Observer {
-            errorMessage -> if(errorMessage != null) showError(errorMessage) else hideError()
+        viewModel.errorMessage.observe(this, Observer { errorMessage ->
+            if (errorMessage != null) showError(errorMessage) else hideError()
         })
 
         binding.viewModel = viewModel
 
 
-
     }
 
-    private fun showError(errorMessage:String){
+    private fun showError(errorMessage: String) {
         errorSnackbar = Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_INDEFINITE)
         errorSnackbar?.show()
     }
 
-    private fun hideError(){
+    private fun hideError() {
         errorSnackbar?.dismiss()
     }
 

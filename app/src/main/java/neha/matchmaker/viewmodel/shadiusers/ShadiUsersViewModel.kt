@@ -14,16 +14,16 @@ import neha.matchmaker.network.APIsMethods
 import neha.matchmaker.view.adapter.ShadiUsersAdapter
 import javax.inject.Inject
 
-class ShadiUsersViewModel(private val usersDao:UsersDao) : BaseViewModel() {
+class ShadiUsersViewModel(private val usersDao: UsersDao) : BaseViewModel() {
     @Inject
     lateinit var apiCall: APIsMethods
-     val userListAdapter: ShadiUsersAdapter = ShadiUsersAdapter(usersDao)
+    val userListAdapter: ShadiUsersAdapter = ShadiUsersAdapter(usersDao)
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<String> = MutableLiveData()
     val errorClickListener = View.OnClickListener { loadEpisodes() }
 
-    private var subscription: Disposable?=null
+    private var subscription: Disposable? = null
 
     init {
         loadEpisodes()
@@ -37,7 +37,7 @@ class ShadiUsersViewModel(private val usersDao:UsersDao) : BaseViewModel() {
     private fun loadEpisodes() {
 
 
-            Observable.fromCallable { usersDao.all }
+        Observable.fromCallable { usersDao.all }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe { onRetrieveEpisodesListStart() }
@@ -59,13 +59,13 @@ class ShadiUsersViewModel(private val usersDao:UsersDao) : BaseViewModel() {
     }
 
     private fun onRetrieveEpisodesListSuccess(userlist: List<Users>) {
-        Log.d("fdh",userlist.toString());
+        Log.d("fdh", userlist.toString());
 
 
         userListAdapter.updateUsersList(userlist)
         loadingVisibility.value = View.GONE
 
-        Log.d("fdh","jkds");
+        Log.d("fdh", "jkds");
     }
 
     private fun onRetrieveEpisodesListError(throwable: Throwable) {
