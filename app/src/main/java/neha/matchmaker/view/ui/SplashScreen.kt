@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity
 import neha.matchmaker.R
 import neha.matchmaker.injection.ViewModelFactory
 import neha.matchmaker.model.database.UsersDao
-import neha.matchmaker.viewmodel.shadiusers.SplashScreenViewModel
+import neha.matchmaker.viewmodels.SplashScreenViewModel
 
 class SplashScreen : AppCompatActivity() {
     private lateinit var binding: neha.matchmaker.databinding.ActivitySplashScreenBinding
@@ -33,7 +33,6 @@ class SplashScreen : AppCompatActivity() {
         viewModel.errorMessage.observe(this, Observer { errorMessage ->
             if (errorMessage != null) showError(errorMessage) else hideError()
         })
-
         binding.viewModel = viewModel
 
 
@@ -48,11 +47,10 @@ class SplashScreen : AppCompatActivity() {
         errorSnackbar?.dismiss()
     }
 
-
     private fun goToMainActivity() {
 
         finish()
-        startActivity(Intent(this, ShadiUsers::class.java))
+        startActivity(Intent(this, UserScreen::class.java))
     }
 
 }

@@ -1,7 +1,6 @@
-package neha.matchmaker.viewmodel.shadiusers
+package neha.matchmaker.viewmodels
 
 import android.arch.lifecycle.MutableLiveData
-import android.util.Log
 import android.view.View
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -10,23 +9,20 @@ import io.reactivex.schedulers.Schedulers
 import neha.matchmaker.base.BaseViewModel
 import neha.matchmaker.model.database.Users
 import neha.matchmaker.model.database.UsersDao
-import neha.matchmaker.network.APIsMethods
-import neha.matchmaker.view.adapter.ShadiUsersAdapter
-import javax.inject.Inject
+import neha.matchmaker.view.adapter.UsersAdapter
 
-class ShadiUsersViewModel(private val usersDao: UsersDao) : BaseViewModel() {
-    @Inject
-    lateinit var apiCall: APIsMethods
-    val userListAdapter: ShadiUsersAdapter = ShadiUsersAdapter(usersDao)
+class UsersViewModel(private val usersDao: UsersDao) : BaseViewModel() {
+    val userListAdapter: UsersAdapter = UsersAdapter(usersDao)
 
     val loadingVisibility: MutableLiveData<Int> = MutableLiveData()
+    val noDataFound: MutableLiveData<Int> = MutableLiveData()
     val errorMessage: MutableLiveData<String> = MutableLiveData()
-    val errorClickListener = View.OnClickListener { loadEpisodes() }
+    val errorClickListener = View.OnClickListener { loadUsers() }
 
     private var subscription: Disposable? = null
 
     init {
-        loadEpisodes()
+        loadUsers()
     }
 
     override fun onCleared() {
@@ -34,7 +30,7 @@ class ShadiUsersViewModel(private val usersDao: UsersDao) : BaseViewModel() {
         subscription?.dispose()
     }
 
-    private fun loadEpisodes() {
+    private fun loadUsers() {
 
 
         Observable.fromCallable { usersDao.all }
@@ -59,13 +55,18 @@ class ShadiUsersViewModel(private val usersDao: UsersDao) : BaseViewModel() {
     }
 
     private fun onRetrieveEpisodesListSuccess(userlist: List<Users>) {
-        Log.d("fdh", userlist.toString());
 
 
-        userListAdapter.updateUsersList(userlist)
-        loadingVisibility.value = View.GONE
+        if(userlist.isEmpty()){
+            noDataFound.value=View.VISIBLE
+        }
+        else {
+            noDataFound.value=View.GONE
 
-        Log.d("fdh", "jkds");
+            userListAdapter.updateUsersList(userlist)
+            loadingVisibility.value = View.GONE
+        }
+
     }
 
     private fun onRetrieveEpisodesListError(throwable: Throwable) {

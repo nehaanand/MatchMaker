@@ -2,8 +2,8 @@ package neha.matchmaker.injection.component
 
 import dagger.Component
 import neha.matchmaker.injection.module.NetworkModule
-import neha.matchmaker.viewmodel.shadiusers.ShadiUsersViewModel
-import neha.matchmaker.viewmodel.shadiusers.SplashScreenViewModel
+import neha.matchmaker.viewmodels.UsersViewModel
+import neha.matchmaker.viewmodels.SplashScreenViewModel
 import javax.inject.Singleton
 
 /**
@@ -14,12 +14,12 @@ import javax.inject.Singleton
 @Component(modules = [(NetworkModule::class)])
 interface ViewModelInjector {
     /**
-     * Injects required dependencies into the specified PostListViewModel.
-     * @param postListViewModel PostListViewModel in which to inject the dependencies
+     * Injects required dependencies into the specified ViewModel.
      */
 
 
-    fun inject(charactersListViewModel: ShadiUsersViewModel)
+    fun inject(charactersListViewModel: UsersViewModel)
+
     fun inject(splashScreenViewModel: SplashScreenViewModel)
 
 

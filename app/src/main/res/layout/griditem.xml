@@ -1,46 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout">
 
     <data>
 
         <import type="android.view.View" />
 
-
         <variable
             name="viewModel"
-            type="neha.matchmaker.model.UsersGridItemModel" />
-
+            type="neha.matchmaker.model.GridItemModel" />
     </data>
-
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-
+        android:layout_height="330dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/shadow_middle"
         android:descendantFocusability="blocksDescendants"
-
-
         app:layout_constraintEnd_toEndOf="@+id/btnAccept"
         app:layout_constraintStart_toEndOf="@+id/btnAccept">
 
         <android.support.v7.widget.CardView
             android:id="@+id/first_card"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="330dp"
             app:cardCornerRadius="5dp"
-
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-
                 android:layout_height="match_parent"
                 app:layout_constraintEnd_toEndOf="@+id/btnDecline"
                 app:layout_constraintStart_toEndOf="@+id/btnDecline">
@@ -50,7 +41,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-
                     app:imageUrl="@{viewModel.getUserImage()}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -63,8 +53,10 @@
                     android:background="@drawable/caritems_gradient"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0" />
 
 
                 <TextView
@@ -74,15 +66,18 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginLeft="20dp"
 
-                    android:layout_marginBottom="140dp"
+                    android:layout_marginBottom="93dp"
                     android:text="Age"
                     android:textColor="@android:color/white"
 
                     android:textSize="15dp"
 
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_name"
+                    app:layout_constraintTop_toTopOf="@+id/btnDecline"
+                    app:layout_constraintVertical_bias="1.0"
                     app:mutableText="@{viewModel.getUserAge()}" />
 
 
@@ -90,24 +85,25 @@
                     android:id="@+id/lbl_city"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="50dp"
-                    android:text="City,State"
+
+                    android:layout_marginLeft="50dp"
+                    android:maxLines="2"
+                    android:text="City, State"
 
                     android:textColor="@android:color/white"
                     android:textSize="15dp"
                     android:textStyle="bold"
-
-                    app:layout_constraintStart_toStartOf="@+id/btnAccept"
-                    app:layout_constraintTop_toTopOf="@+id/lbl_age"
+                    app:layout_constraintBottom_toBottomOf="@+id/lbl_age"
+                    app:layout_constraintLeft_toRightOf="@+id/lbl_age"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_name"
                     app:mutableText="@{viewModel.getUserCity()}" />
-
-                <!--android:background="#1b6873"-->
 
                 <Button
                     android:id="@+id/btnDecline"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginBottom="20dp"
                     android:background="@drawable/reject"
                     android:text="REJECT"
                     android:textAllCaps="false"
@@ -135,10 +131,9 @@
                     android:layout_marginRight="10dp"
 
                     android:background="@drawable/accept"
+
                     android:text="ACCEPT"
-
                     android:textAllCaps="false"
-
                     android:textColor="@android:color/white"
                     android:textStyle="italic"
                     android:visibility="@{(viewModel.getUserStatus().equals(`Declined`) || viewModel.getUserStatus().equals(`Accepted`))? View.GONE : View.VISIBLE }"
@@ -153,54 +148,49 @@
                     android:id="@+id/lbl_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="113dp"
-
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="200dp"
+                    android:layout_marginBottom="8dp"
                     android:text="Name"
                     android:textColor="@android:color/white"
                     android:textSize="15dp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/lbl_age"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/iv_gender"
                     app:layout_constraintTop_toTopOf="parent"
                     app:mutableText="@{viewModel.getUserName()}" />
 
-                <!--app:mutableVisibility="@{viewModel.getUserStatus().equals(` `)?gone:visible}"-->
 
                 <Button
                     android:id="@+id/btnStatus"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="28dp"
                     android:background="@drawable/status"
                     android:textColor="@android:color/white"
                     android:visibility="@{viewModel.getUserStatus().equals(``)? View.GONE : View.VISIBLE }"
-                    app:layout_constraintBottom_toBottomOf="@+id/btnAccept"
-                    app:layout_constraintEnd_toEndOf="@+id/btnDecline"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnDecline"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintLeft_toRightOf="@+id/guideline"
                     app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/btnAccept"
-                    app:mutableText="@{viewModel.getUserStatus()}"
-                    tools:layout_editor_absoluteY="229dp" />
+                    app:layout_constraintTop_toTopOf="@+id/btnDecline"
+                    app:mutableText="@{viewModel.getUserStatus()}" />
 
                 <ImageView
                     android:id="@+id/iv_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
 
-                    android:layout_marginStart="48dp"
-                    android:layout_marginLeft="48dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_marginRight="8dp"
+                    android:layout_marginBottom="10dp"
+
                     android:src="@{viewModel.getUserGender().equals(`male`)?@drawable/ic_male:@drawable/ic_female}"
                     app:layout_constraintBottom_toBottomOf="@+id/lbl_name"
-                    app:layout_constraintEnd_toStartOf="@+id/guideline"
-                    app:layout_constraintRight_toRightOf="@+id/lbl_name"
-                    app:layout_constraintStart_toEndOf="@+id/lbl_name"
+                    app:layout_constraintRight_toLeftOf="@+id/lbl_name"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/lbl_name" />
 
             </android.support.constraint.ConstraintLayout>

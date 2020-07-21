@@ -9,7 +9,7 @@ import retrofit2.http.GET
  */
 interface APIsMethods {
     /**
-     * Get the list of the pots from the API
+     * Get the users data from the API
      */
 
     @GET("?results=10")
